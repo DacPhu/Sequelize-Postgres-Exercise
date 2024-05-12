@@ -13,20 +13,14 @@ app.engine(
     partialsDir: __dirname + "/views/partials",
     extname: "hbs",
     defaultLayout: "layout",
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+    },
   })
 );
 
 app.set("view engine", "hbs");
 
-app.get("/", (req, res) => {
-  res.render("index");
-});
-
-app.get("/createTable", (req, res) => {
-  let models = require("./models");
-  models.sequelize.sync().then(() => {
-    res.send("Table created!");
-  });
-});
+app.use("/", require("./routes/indexRoute"));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -21,5 +21,6 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Category",
     }
   );
+
   return Category;
 };
