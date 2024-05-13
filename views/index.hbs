@@ -6,7 +6,7 @@
         <div class="breadcrumb__text">
           <h2>Blogs</h2>
           <div class="breadcrumb__option">
-            <a href="index.html">Home</a>
+            <a href="index">Home</a>
             <span>Blog</span>
           </div>
         </div>
@@ -14,47 +14,14 @@
     </div>
   </div>
 </section>
+<!-- Breadcrumb Section End -->
 
 <!-- Blog Section Begin -->
 <section class="blog spad">
   <div class="container">
     <div class="row">
       <div class="col-lg-4 col-md-5">
-        <div class="blog__sidebar">
-          <div class="blog__sidebar__search">
-            <form action="#">
-              <input type="text" placeholder="Search..." />
-              <button type="submit"><span class="icon_search"></span></button>
-            </form>
-          </div>
-          <div class="blog__sidebar__item">
-            <h4>Categories</h4>
-            <ul>
-              <li><a href="/index">All</a></li>
-              {{#each categories}}
-                <li><a href="#">{{name}} (9)</a></li>
-              {{/each}}
-              {{!-- <li><a href="#">{{name}} (20)</a></li>
-              <li><a href="#">{{fo}} (5)</a></li>
-
-              <li><a href="#">Travel (10)</a></li> --}}
-            </ul>
-          </div>
-
-          <div class="blog__sidebar__item">
-            <h4>Search By Tags</h4>
-            <div class="blog__sidebar__item__tags">
-              {{#each tags}}
-                <a href="#">{{name}}</a>
-              {{/each}}
-              {{! <a href="#">Beauty</a>
-              <a href="#">Vegetables</a>
-              <a href="#">Fruit</a>
-              <a href="#">Healthy Food</a>
-              <a href="#">Lifestyle</a> }}
-            </div>
-          </div>
-        </div>
+        {{> sidebar}}
       </div>
       <div class="col-lg-8 col-md-7">
         <div class="row">
@@ -66,14 +33,13 @@
                 </div>
                 <div class="blog__item__text">
                   <ul>
-                    <li><i class="fa fa-calendar-o"></i> {{updatedAt}}</li>
-                    <li><i class="fa fa-comment-o"></i> 5</li>
+                    <li><i class="fa fa-calendar-o"></i> {{createdAt}}</li>
+                    <li><i class="fa fa-comment-o"></i> {{commentCount}}</li>
                   </ul>
-                  <h5><a href="details">{{title}}</a></h5>
-                  <p>Sed quia non numquam modi tempora indunt ut labore et
-                    dolore magnam aliquam quaerat
+                  <h5><a href="/details/{{id}}">{{title}}</a></h5>
+                  <p>{{summary}}
                   </p>
-                  <a href="details" class="blog__btn">READ MORE
+                  <a href="/details/{{id}}" class="blog__btn">READ MORE
                     <span class="arrow_right"></span></a>
                 </div>
               </div>

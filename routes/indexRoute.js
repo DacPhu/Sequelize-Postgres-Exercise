@@ -6,6 +6,4 @@ const controller = require("../controllers/indexController");
 
 router.get("/", controller.showData);
 
-router.get("/details", controller.showDetails);
-
 module.exports = router;
