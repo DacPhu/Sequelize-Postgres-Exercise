@@ -13,6 +13,7 @@ controller.showData = async (req, res) => {
   const tagsPromise = Tag.findAll();
   const categoryPromise = Blog.findAll({
     attributes: [
+      [Sequelize.col("Category.id"), "categoryId"],
       [Sequelize.col("Category.name"), "categoryName"],
       [Sequelize.fn("COUNT", Sequelize.col("*")), "count"],
     ],
@@ -22,7 +23,7 @@ controller.showData = async (req, res) => {
         attributes: [],
       },
     ],
-    group: ["Category.name"],
+    group: ["Category.id", "Category.name"],
     raw: true,
   });
 
@@ -33,6 +34,7 @@ controller.showData = async (req, res) => {
       "createdAt",
       "summary",
       "imagePath",
+      "categoryId",
       [Sequelize.fn("COUNT", Sequelize.col("*")), "commentCount"],
     ],
     include: [
@@ -46,13 +48,20 @@ controller.showData = async (req, res) => {
   });
 
   try {
-    const [categories, tags, blogs] = await Promise.all([
+    const [categories, allTags, blogs] = await Promise.all([
       categoryPromise,
       tagsPromise,
       blogsWithComments,
     ]);
 
-    res.render("index", { categories, tags, blogs });
+    let category = isNaN(req.query.category) ? 0 : parseInt(req.query.category);
+
+    let filter_blogs = blogs;
+    if (category > 0) {
+      filter_blogs = blogs.filter((item) => item.categoryId == category);
+    }
+
+    res.render("index", { filter_blogs, allTags, categories });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

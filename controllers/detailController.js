@@ -52,7 +52,18 @@ controller.showDetails = async (req, res) => {
   //     ],
   //   });
   //   console.log(tags);
-  const tags = {};
+
+  const blogTag = await Blog.findOne({
+    where: { id: blog.id },
+    include: [
+      {
+        model: Tag,
+        through: "BlogTag",
+      },
+    ],
+  });
+
+  const tags = blogTag.Tags.map((item) => item.name);
 
   const author = await User.findOne({
     where: { id: blog.authorId },

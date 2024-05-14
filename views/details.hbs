@@ -52,7 +52,7 @@
                   <ul>
                     <li><span>Categories:</span> {{category.name}}</li>
                     <li><span>Tags:</span>
-                      All{{#each tags}}, {{name}}{{/each}}
+                      {{#each tags}} {{this}}{{#unless @last}}, {{/unless}}{{/each}}
                     </li>
                   </ul>
                   <div class="blog__details__social">
