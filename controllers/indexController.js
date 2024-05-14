@@ -55,10 +55,23 @@ controller.showData = async (req, res) => {
     ]);
 
     let category = isNaN(req.query.category) ? 0 : parseInt(req.query.category);
+    let tag = isNaN(req.query.tag) ? 0 : parseInt(req.query.tag);
+    let keyword = req.query.keyword || "";
 
     let filter_blogs = blogs;
+
     if (category > 0) {
-      filter_blogs = blogs.filter((item) => item.categoryId == category);
+      filter_blogs = filter_blogs.filter((item) => item.categoryId == category);
+    }
+
+    if (tag > 0) {
+      filter_blogs = filter_blogs.filter((item) => item.tagId == tag);
+    }
+
+    if (keyword.trim() != "") {
+      filter_blogs = filter_blogs.filter((item) =>
+        item.title.toLowerCase().includes(keyword.toLowerCase())
+      );
     }
 
     res.render("index", { filter_blogs, allTags, categories });
