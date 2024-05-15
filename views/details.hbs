@@ -11,7 +11,7 @@
             <h2>{{blog.title}}</h2>
             <ul>
               <li>By {{author.firstName}} {{author.lastName}}</li>
-              <li>{{blog.createdAt}}</li>
+              <li>{{formatDate blog.createdAt "ddd MMM D YYYY"}}</li>
               <li>{{comments.length}} Comments</li>
             </ul>
           </div>

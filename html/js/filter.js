@@ -34,16 +34,21 @@ function filterContent() {
 
   var url = window.location.href;
 
+  if (url.includes("#")) url.replace("#", "");
+
   if (selectedCategoryId !== "") {
     if (url.includes("category=")) {
-      url = url.replace(/(category=)[^&]+/, "$1" + selectedCategoryId); // Replace category parameter
+      url = url.replace(/(category=)[^&]+/, "$1" + selectedCategoryId);
     } else {
-      url += (url.includes("?") ? "&" : "?") + "category=" + selectedCategoryId; // Append category parameter
+      url +=
+        (url.includes("keyword") ? "&" : "?") +
+        "category=" +
+        selectedCategoryId;
     }
   }
 
   if (selectedTags.length > 0) {
-    if (url.includes("tags=")) {
+    if (url.includes("tag=")) {
       url = url.replace(
         /(tag=)[^&]+/,
         "$1" + encodeURIComponent(selectedTags.join(","))

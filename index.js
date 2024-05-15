@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const port = 4000;
 const expressHandleBars = require("express-handlebars");
-const moment = require("moment");
+const formatDate = require("./helpers/timeHelpers");
 
 app.use(express.static(__dirname + "/html/"));
 
@@ -16,6 +16,9 @@ app.engine(
     defaultLayout: "layout",
     runtimeOptions: {
       allowProtoPropertiesByDefault: true,
+    },
+    helpers: {
+      formatDate: formatDate,
     },
   })
 );
