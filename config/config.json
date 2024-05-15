@@ -7,17 +7,17 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "postgre",
+    "password": "s08bEzX1S3fZp9JOEqJekSNGFWfnwatB",
+    "database": "sequelize_exercise",
+    "host": "dpg-cp2f22fsc6pc73a4p67g-a",
+    "dialect": "postgres"
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "password": "s08bEzX1S3fZp9JOEqJekSNGFWfnwatB",
+    "database": "sequelize_exercise",
+    "host": "dpg-cp2f22fsc6pc73a4p67g-a",
+    "dialect": "postgres"
   }
 }
