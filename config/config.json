@@ -14,7 +14,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "root",
+    "username": "postgre",
     "password": "s08bEzX1S3fZp9JOEqJekSNGFWfnwatB",
     "database": "sequelize_exercise",
     "host": "dpg-cp2f22fsc6pc73a4p67g-a",
