@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "postgres",
-    "password": ".Dcpu22042003",
-    "database": "sequelize-postgres-exercise-db",
-    "host": "127.0.0.1",
+    "username": "postgre",
+    "password": "s08bEzX1S3fZp9JOEqJekSNGFWfnwatB",
+    "database": "sequelize_exercise",
+    "host": "dpg-cp2f22fsc6pc73a4p67g-a",
     "dialect": "postgres"
   },
   "test": {
