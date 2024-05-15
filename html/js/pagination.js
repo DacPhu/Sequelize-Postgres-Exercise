@@ -1,14 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
   const nextPageBtn = document.getElementById("nextPage");
+
   const prevPageBtn = document.getElementById("prevPage");
 
-  let currentPage = 1;
-  const numPages = parseInt("{{num_pages}}");
-
   nextPageBtn.addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent the default behavior of the link
-    if (currentPage <= numPages) {
-      currentPage++;
+    event.preventDefault();
+    if (currentPage < numPages) {
+      currentPage = currentPage + 1;
       document.querySelector(".blog__pagination a:nth-child(2)").textContent =
         currentPage;
     }
@@ -20,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (url.includes("page=")) {
-      url.replace(/(page=)[^&]+/, "page=" + currentPage);
+      url = url.replace(/(page=)[^&]+/, "page=" + currentPage);
     } else {
       if (
         url.includes("category") ||
@@ -36,9 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   prevPageBtn.addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent the default behavior of the link
-    if (currentPage >= 1) {
-      currentPage--;
+    event.preventDefault();
+    if (currentPage > 1) {
+      currentPage = currentPage - 1;
       document.querySelector(".blog__pagination a:nth-child(2)").textContent =
         currentPage;
     }
@@ -51,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (url.includes("page=")) {
-      url.replace(/(page=)[^&]+/, "page=" + currentPage);
+      url = url.replace(/(page=)[^&]+/, "page=" + currentPage);
     } else {
       if (
         url.includes("category") ||

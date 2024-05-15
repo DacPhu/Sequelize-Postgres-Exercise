@@ -1,18 +1,3 @@
-document.querySelectorAll(".category").forEach(function (category) {
-  category.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    document.querySelectorAll(".category").forEach(function (cat) {
-      if (cat !== category) {
-        cat.classList.remove("selected");
-      }
-    });
-
-    category.classList.toggle("selected");
-    filterContent();
-  });
-});
-
 document.querySelectorAll(".tag").forEach(function (tag) {
   tag.addEventListener("click", function () {
     this.classList.toggle("selected");
@@ -21,11 +6,6 @@ document.querySelectorAll(".tag").forEach(function (tag) {
 });
 
 function filterContent() {
-  var selectedCategory = document.querySelector(
-    ".category.selected:not([data-id='all']"
-  );
-  var selectedCategoryId = selectedCategory ? selectedCategory.dataset.id : "";
-
   var selectedTags = Array.from(document.querySelectorAll(".tag.selected")).map(
     function (tag) {
       return tag.dataset.value;
@@ -35,17 +15,6 @@ function filterContent() {
   var url = window.location.href;
 
   if (url.includes("#")) url.replace("#", "");
-
-  if (selectedCategoryId !== "") {
-    if (url.includes("category=")) {
-      url = url.replace(/(category=)[^&]+/, "$1" + selectedCategoryId);
-    } else {
-      url +=
-        (url.includes("keyword") ? "&" : "?") +
-        "category=" +
-        selectedCategoryId;
-    }
-  }
 
   if (selectedTags.length > 0) {
     if (url.includes("tag=")) {

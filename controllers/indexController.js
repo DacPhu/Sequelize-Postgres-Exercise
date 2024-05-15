@@ -92,11 +92,11 @@ controller.showData = async (req, res) => {
       );
     }
 
-    let limit = 4;
+    let limit = 6;
     let startIndex = (page - 1) * limit;
     let endIndex = page * limit;
+    let num_pages = Math.ceil((1.0 * filter_blogs.length) / limit);
     filter_blogs = filter_blogs.slice(startIndex, endIndex);
-    let num_pages = Math.ceil(filter_blogs.length / limit);
 
     res.render("index", {
       filter_blogs,
