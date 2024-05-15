@@ -27,7 +27,7 @@ controller.showData = async (req, res) => {
     raw: true,
   });
 
-  const blogsWithComments = Blog.findAll({
+  const blogsPromise = Blog.findAll({
     attributes: [
       "id",
       "title",
@@ -47,16 +47,28 @@ controller.showData = async (req, res) => {
     raw: true,
   });
 
+  const blogTagsPromise = Blog.findAll({
+    include: [
+      {
+        model: Tag,
+        through: "BlogTag",
+      },
+    ],
+  });
+
   try {
-    const [categories, allTags, blogs] = await Promise.all([
+    const [categories, allTags, blogs, blogTags] = await Promise.all([
       categoryPromise,
       tagsPromise,
-      blogsWithComments,
+      blogsPromise,
+      blogTagsPromise,
     ]);
 
     let category = isNaN(req.query.category) ? 0 : parseInt(req.query.category);
     let tag = isNaN(req.query.tag) ? 0 : parseInt(req.query.tag);
     let keyword = req.query.keyword || "";
+
+    let page = isNaN(req.query.page) ? 1 : parseInt(req.query.page);
 
     let filter_blogs = blogs;
 
@@ -65,7 +77,9 @@ controller.showData = async (req, res) => {
     }
 
     if (tag > 0) {
-      filter_blogs = filter_blogs.filter((item) => item.tagId == tag);
+      filter_blogs = blogTags.filter((item) =>
+        item.Tags.map((tag) => tag.id).includes(tag)
+      );
     }
 
     if (keyword.trim() != "") {
@@ -73,6 +87,9 @@ controller.showData = async (req, res) => {
         item.title.toLowerCase().includes(keyword.toLowerCase())
       );
     }
+
+    let limit = 2;
+    let offset = page ? limit * (page - 1) : 0;
 
     res.render("index", { filter_blogs, allTags, categories });
   } catch (error) {

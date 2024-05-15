@@ -43,16 +43,6 @@ controller.showDetails = async (req, res) => {
 
   const allTags = await Tag.findAll();
 
-  //   const tags = await Tag.findAll({
-  //     include: [
-  //       {
-  //         through: BlogTag,
-  //         attributes: [],
-  //       },
-  //     ],
-  //   });
-  //   console.log(tags);
-
   const blogTag = await Blog.findOne({
     where: { id: blog.id },
     include: [
