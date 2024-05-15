@@ -72,12 +72,15 @@ controller.showData = async (req, res) => {
 
     let filter_blogs = blogs;
 
+    console.log(category);
+    console.log(tag);
+
     if (category > 0) {
-      filter_blogs = filter_blogs.filter((item) => item.categoryId == category);
+      filter_blogs = blogTags.filter((item) => item.categoryId == category);
     }
 
     if (tag > 0) {
-      filter_blogs = blogTags.filter((item) =>
+      filter_blogs = filter_blogs.filter((item) =>
         item.Tags.map((tag) => tag.id).includes(tag)
       );
     }

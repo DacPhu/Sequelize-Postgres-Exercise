@@ -10,7 +10,11 @@
     <ul>
       <li> <a href="/"> All</a></li>
       {{#each categories}}
-        <li><a href="/?category={{categoryId}}">{{categoryName}}
+        <li><a
+            href="#"
+            class="category"
+            data-id="{{categoryId}}"
+          >{{categoryName}}
             ({{count}})</a></li>
       {{/each}}
     </ul>
@@ -20,7 +24,7 @@
     <h4>Search By Tags</h4>
     <div class="blog__sidebar__item__tags">
       {{#each allTags}}
-        <a href="/?tag={{id}}">{{name}}</a>
+        <a href="#" class="tag" data-value="{{id}}">{{name}}</a>
       {{/each}}
     </div>
   </div>
